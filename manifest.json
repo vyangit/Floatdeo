@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "Floatdeo",
+    "version": "1.0",
+    "description": "Allows users to play videos in a separate floating window",
+    "permissions": [
+        "activeTab",
+        "background"
+    ],
+
+    "browser_action": {
+        "default_title":"Floatdeo",
+        "default_popup": "popup.html"
+    },
+
+    "background": {
+        "scripts":["background.js"],
+        "persistent": false
+    },
+
+    "content_scripts":[
+        {
+            "matches":["<all_urls>"],
+            "js":["jquery-3.5.1.slim.min.js","content.js"],
+            "css":["content.css"]
+        }
+    ],
+
+    "web_accessible_resources": [
+        "assets/pip.svg",
+        "assets/pip.png"
+    ]
+}
