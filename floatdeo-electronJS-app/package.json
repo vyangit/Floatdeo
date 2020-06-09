@@ -1,0 +1,30 @@
+{
+  "name": "floatdeo-electronjs-extension",
+  "version": "0.7.0",
+  "description": "Standalone floating video window playing app and supplemental app to the Floatdeo chrome extension",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vyangit/Floatdeo.git"
+  },
+  "keywords": [
+    "picture-in-picture",
+    "floating",
+    "window",
+    "video",
+    "streaming"
+  ],
+  "author": "vyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vyangit/Floatdeo/issues"
+  },
+  "homepage": "https://github.com/vyangit/Floatdeo",
+
+  "devDependencies": {
+    "electron": "^9.0.3"
+  }
+}
