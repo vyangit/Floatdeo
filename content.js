@@ -1,12 +1,61 @@
 $(document).ready(function() {
+    $(this).mousemove(
+        function() {
+            /** Base check: Check if we are directly over a video
+             * already so we don't fire another event that is taken
+             * care by the video on hover function {showFloatdeoVideo}
+             */
+            let element = event.toElement;
+            if (element.nodeName == "VIDEO" || element.classList.contains("floatdeoPopupButton")){
+                // Do nothing, will be handled from another event listener
+            } else {
+                let video = findRelativeVideoRect(event);
+                if (video == null) {
+                    hideFloatdeoButton();
+                } else {
+                    showFloatdeoButton(video, event);
+                }
+            }
+        }
+    );
+
     var videos = $("video");
     videos.hover(
         function() {
             showFloatdeoButton(this, event);
         }, function(event) {
-            hideFloatdeoButton(this, event);
+            /**  
+             * Check if mouse has actually left the video view.
+             * Addresses the case where the button is hovered over and 
+             * causes the browser to interpret the hover as a leaving 
+             * of the initial video bounds
+             * */
+            if (!isRelativeToRect(this, event)){ 
+                hideFloatdeoButton(); 
+            }
         });
 });
+
+/**
+ * Determines if the mouse cursor is over a video html element
+ * and returns the corresponding video element.
+ * 
+ * @param {MouseEvent} event 
+ * 
+ * @returns {HTMLElement} If the mouse cursor is positioned over a video, the video else null
+ */
+function findRelativeVideoRect(event) {
+    var relativeVideo = null;
+    $("video").each( (_, video) => {
+        // Should only find one
+        // TODO: Look into if multiple videos overlays cause problems and add check if it does 
+        if (isRelativeToRect(video, event)) {
+            relativeVideo = video;
+        }
+    });
+
+    return relativeVideo;
+}
 
 /**
  * 
@@ -15,7 +64,7 @@ $(document).ready(function() {
  */
 function showFloatdeoButton(video, event) {
     // Prevents double button set up
-    if (stillRelativeToRect(video, event)) return;
+    if ( $('.floatdeoPopupButton').length != 0) return;
 
     // Setup and create the button
     let imgSrc = chrome.runtime.getURL("assets/pip.png");
@@ -44,7 +93,7 @@ function showFloatdeoButton(video, event) {
 
     // Position the button relative to the video's bounds
     let videoBounds = video.getBoundingClientRect();
-    let x = window.scrollX+videoBounds.right-floatdeoButton.clientWidth;
+    let x = window.scrollX+videoBounds.right-floatdeoButton.clientWidth-5; // 5 is padding
     let y = window.scrollY+videoBounds.bottom+(floatdeoButton.clientHeight/2)-(video.clientHeight/2);
 
     let xPixels = x.toString()+'px';
@@ -54,30 +103,19 @@ function showFloatdeoButton(video, event) {
         "left": xPixels,
         "top": yPixels,
         "z-index": "10000"
+    }).click((video) => {
+        requestPictureInPictureScreen(video);
     }).mouseleave((event, video) => {
         hideFloatdeoButton(video, event)
     }).show();
 }
 
 /**
- * 
- * @param {HTMLElement} video 
- * @param {MouseEvent} event 
+ * Hides the floatdeoButtons
  */
-function hideFloatdeoButton(video, event){
-    /**  
-     * Check if mouse has actually left the video view.
-     * Addresses the case where the button is hovered over and 
-     * causes the browser to interpret the hover as a leaving 
-     * of the initial video bounds
-     * */
-    let isRelative = stillRelativeToRect(video, event)
-
-    if (!isRelative){ 
-        // Clear all buttons
-        $(document.body).find('.floatdeoPopupButton').hide();
-        $(document.body).find('.floatdeoPopupButton').remove();
-    }
+function hideFloatdeoButton(){
+    $(document.body).find('.floatdeoPopupButton').hide();
+    $(document.body).find('.floatdeoPopupButton').remove();
 }
 
 /**
@@ -89,15 +127,21 @@ function hideFloatdeoButton(video, event){
  * floatdeo button as relative and anything else not 
  * (i.e video overlays, exterior of video bounds)
  */
-function stillRelativeToRect(video, event) {
+function isRelativeToRect(video, event) {
     if (video == null || event == null) return false;
-    let intoTarget = event.relatedTarget;
+    let intoTarget = event.toElement;
     let bounds = video.getBoundingClientRect();
     let cursorX = event.pageX;
     let cursorY = event.pageY;
 
-    return ((intoTarget == video || 
-        intoTarget == $('.floatdeoPopupButton')[0])
-        && (cursorX >= bounds.left && cursorX <= bounds.right && cursorY >= bounds.top && cursorY <= bounds.bottom)
-    );
+    return (intoTarget == $('.floatdeoPopupButton')[0])
+        || (cursorX >= bounds.left && cursorX <= bounds.right && cursorY >= bounds.top && cursorY <= bounds.bottom);
+}
+
+/**
+ * 
+ * @param {HTMLElement} video The reference dom video 
+ */
+function requestPictureInPictureScreen(video) {
+
 }
