@@ -1,0 +1,9 @@
+.floatdeoPopupButton {
+    position: absolute;
+    z-index: -10000; 
+    
+    color:white;
+    background: #080808;
+    opacity: 0.6;
+    padding: 3px;
+}
