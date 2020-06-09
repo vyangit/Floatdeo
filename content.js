@@ -112,7 +112,9 @@ function showFloatdeoButton(video) {
     }).click(() => {
         requestPictureInPictureScreen(video);
     }).mouseleave((event, video) => {
-        hideFloatdeoButton(video, event)
+        if (!isRelativeToRect(this, event)){ 
+            hideFloatdeoButton(video, event)
+        }
     }).show();
 }
 
