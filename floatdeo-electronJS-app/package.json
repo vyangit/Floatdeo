@@ -2,8 +2,9 @@
   "name": "floatdeo-electronjs-extension",
   "version": "0.7.0",
   "description": "Standalone floating video window playing app and supplemental app to the Floatdeo chrome extension",
-  "main": "app.js",
+  "main": "./src/main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,8 +24,12 @@
     "url": "https://github.com/vyangit/Floatdeo/issues"
   },
   "homepage": "https://github.com/vyangit/Floatdeo",
-
   "devDependencies": {
-    "electron": "^9.0.3"
+    "electron": "^9.0.4"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1"
   }
 }
