@@ -8,7 +8,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-//
+// Locals
 import App from "./App.js"
 
 ReactDOM.render(<App/>, document.getElementById("root"));

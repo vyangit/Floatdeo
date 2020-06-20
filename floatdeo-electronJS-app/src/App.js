@@ -5,7 +5,7 @@
  */
 
 // Node modules
-var React = require('react');
+const React = require('react');
 
 // Locals
 import FloatdeoMainPage from './js/pages/FloatdeoMainPage'

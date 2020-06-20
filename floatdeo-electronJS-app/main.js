@@ -20,6 +20,9 @@ function createWindow() {
 	// load the index.html of the app
 	win.loadFile('index.html')
 
+	// Comment out to disable dev tools
+	win.webContents.openDevTools();
+
 	win.on('closed', () => {
 		win = null
 	});	
@@ -28,9 +31,11 @@ function createWindow() {
 function registerFileProtocol() {
 	protocol.registerFileProtocol('floatdeo', (request, callback) => {
 		const url = request.url.substr(11)
-		callback({ path: path.normalize(`${__dirname}/${url}`) })
-	}, (error) => {
-		if (error) console.error('Failed to register protocol');
+		if (url) {
+			callback({ path: path.normalize(`${__dirname}/${url}`) })
+		} else {
+			console.error('Failed to register protocol');
+		}
 	});
 }
 

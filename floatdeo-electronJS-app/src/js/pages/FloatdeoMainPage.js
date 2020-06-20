@@ -10,18 +10,18 @@ const React = require('react');
 // Locals
 
 
-class FloatdeoMainPage extends React.Component {
+export default class FloatdeoMainPage extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
+        console.log("hello");
         return (
             <div>
-                Hello floatdeo
+                <p>Hello floatdeo</p>
             </div>
         );   
     }
 }
 
-ReactDOM.render(<FloatdeoMainPage/>, document.getElementById("root"));
