@@ -5,7 +5,8 @@
   "main": "./main.js",
   "scripts": {
     "build": "webpack",
-    "start": "electron .",
+    "run": "electron .",
+    "start": "npm run-script build & npm run-script run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
