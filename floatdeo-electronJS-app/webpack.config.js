@@ -11,20 +11,25 @@ module.exports = {
   resolve: {
     modules: [
       path.resolve('src'),
+      path.resolve('src/js'),
       path.resolve('node_modules')
     ]
   },
   module: {
     rules: [
       {
-        test: /\.js$/, 
-        use: [{
-          loader: 'babel-loader',
-          query: {
-              presets:['@babel/preset-react']
-            }
-          }]
-        } 
+      test: /\.js$/, 
+      use: [{
+        loader: 'babel-loader',
+        query: {
+            presets:['@babel/preset-react']
+          }
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
     ]
   },
   target: 'node'

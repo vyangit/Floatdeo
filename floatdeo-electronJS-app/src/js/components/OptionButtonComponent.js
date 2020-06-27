@@ -5,8 +5,8 @@
  */
 
 // Node modules
-const React = require('react');
-const PropTypes = require('prop-types');
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Locals
 

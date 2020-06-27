@@ -5,10 +5,11 @@
  */
 
 // Node modules
-const React = require('react');
+import React from 'react';
 
 // Locals
-
+import VideoContainerComponent from 'components/VideoContainerComponent.js'
+import BottomOptionsBarComponent from 'components/BottomOptionsBarComponent.js'
 
 export default class FloatdeoMainPage extends React.Component {
     constructor(props) {
@@ -16,10 +17,10 @@ export default class FloatdeoMainPage extends React.Component {
     }
 
     render() {
-        console.log("hello");
         return (
             <div>
-                <p>Hello floatdeo</p>
+                <VideoContainerComponent/>
+                <BottomOptionsBarComponent/>
             </div>
         );   
     }

@@ -5,10 +5,12 @@
  */
 
 // Node modules
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // Locals
-import App from "./App.js"
+import App from "./App.js";
+import "./css/style.css";
+import "./css/bootstrap.css";
 
 ReactDOM.render(<App/>, document.getElementById("root"));

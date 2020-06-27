@@ -5,7 +5,7 @@ var PropTypes = require("prop-types");
 // Locals
 import OptionButtonComponent from './OptionButtonComponent';
 
-export default class BottomOptionBarComponent extends React.Component {
+export default class BottomOptionsBarComponent extends React.Component {
     constructor(props) {
         super(props);
     }

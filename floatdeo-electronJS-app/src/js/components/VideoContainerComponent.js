@@ -5,12 +5,12 @@
  */
 
 // Node modules
-var React = require('react');
+import React from 'react';
 
 // Locals
 
 
-export default class VideoLayerComponent extends React.Component {
+export default class VideoContainerComponent extends React.Component {
     constructor(props) {
         super(props);
     }

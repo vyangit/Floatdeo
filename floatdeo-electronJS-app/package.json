@@ -39,9 +39,11 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
+    "css-loader": "^3.6.0",
     "jquery": "^3.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "style-loader": "^1.2.1"
   }
 }
