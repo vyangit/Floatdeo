@@ -1,5 +1,40 @@
 html, body {
   margin: 0;
   height: 100%;
-  background-color: #2e2c29;
+  background: #2e2c29;
+}
+
+#root {
+  margin: 0;
+  height: 100%;
+  background: #2e2c29;
+}
+
+.floatdeo-main-container {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main-display-container  {
+  margin: 0;
+  width: 100%;
+  height: 80%;
+}
+
+.video-container {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.options-bar {
+  width: 100%;
+  height: 20%;
+  background-color: #990099a4;
+}
+
+.options-bar-button {
+  margin-left: 5%;
+  margin-right: 5%
 }

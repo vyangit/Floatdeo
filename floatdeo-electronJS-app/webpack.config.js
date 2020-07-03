@@ -10,10 +10,15 @@ module.exports = {
   },
   resolve: {
     modules: [
-      path.resolve('src'),
-      path.resolve('src/js'),
-      path.resolve('node_modules')
-    ]
+      path.resolve('node_modules'),
+      path.resolve('src')
+    ],
+    alias: {
+      Pages: path.resolve(__dirname, 'src/js/pages'),
+      Components: path.resolve(__dirname,'src/js/components/'),
+      Objects: path.resolve(__dirname, 'src/js/objects'),
+      Styles: path.resolve(__dirname, 'src/css/'),
+    }
   },
   module: {
     rules: [
@@ -29,8 +34,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
       }
     ]
   },
-  target: 'node'
+  target: 'node',
+  watch: true
 };

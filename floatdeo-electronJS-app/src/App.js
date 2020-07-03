@@ -8,7 +8,7 @@
 const React = require('react');
 
 // Locals
-import FloatdeoMainPage from './js/pages/FloatdeoMainPage'
+import FloatdeoMainPage from 'Pages/FloatdeoMainPage'
 
 export default class App extends React.Component {
     constructor(props) {
