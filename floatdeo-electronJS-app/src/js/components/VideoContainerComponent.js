@@ -21,6 +21,8 @@ export default class VideoContainerComponent extends React.Component {
 
     parseAndAdjustEmbeddedSrc(htmlElement) {
         //TODO
+
+        
     }
 
     parseVideoSrcFromWebsite(httpLink) {

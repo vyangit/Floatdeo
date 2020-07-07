@@ -10,7 +10,4 @@ class FloatdeoWindowSettings {
         this.alwaysOnTop = false
     }
 
-    getPropType() {
-        //TODO: Add prop type check 
-    }
 }

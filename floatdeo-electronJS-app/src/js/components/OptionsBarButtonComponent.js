@@ -24,7 +24,7 @@ export default class OptionsBarButtonComponent extends React.Component {
     }
 }
 
-// OptionsBarButtonComponent.propTypes = {
-//     eventCb: PropTypes.func.isRequired,
-//     relativeIconSrc: PropTypes.string.isRequired
-// }
+OptionsBarButtonComponent.propTypes = {
+    eventCb: PropTypes.func.isRequired,
+    icon: PropTypes.object.isRequired //JSX react material icon component
+}
