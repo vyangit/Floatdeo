@@ -6,6 +6,7 @@
 
 // Node modules
 import React from 'react';
+import {CSSTransition} from 'react-transition-group';
 
 // Locals
 import VideoContainerComponent from 'Components/VideoContainerComponent';
@@ -25,6 +26,7 @@ export default class FloatdeoMainPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isOverlayDisplayed: false,
             currentOverlayId: null,
             videoDetails: null
         }
@@ -36,8 +38,7 @@ export default class FloatdeoMainPage extends React.Component {
         }
 
         this.setCurrentOverlay = this.setCurrentOverlay.bind(this);
-        this.isShownCheck = this.isShownCheck.bind(this);
-        
+        this.buildCurrentOverlayContents = this.buildCurrentOverlayContents.bind(this);
         this.setAndLaunchVideoSrc = this.setAndLaunchVideoSrc.bind(this);
         
     }
@@ -51,12 +52,26 @@ export default class FloatdeoMainPage extends React.Component {
         }
 
         this.setState ({
+            isOverlayDisplayed: currId != null,
             currentOverlayId: currId,
         });
     }
 
-    isShownCheck(id) {
-        return this.state.currentOverlayId == id;
+    buildCurrentOverlayContents() {
+        let closeOverlayFn = this.setCurrentOverlay.bind(this,null);
+
+        switch (this.state.currentOverlayId) {
+            case this.overlayIds.VIDEOSRC:
+                return <VideoSrcOverlay closeOverlayCb={closeOverlayFn} srcVideoCb={this.setAndLaunchVideoSrc}/>;
+            case this.overlayIds.HISTORY:
+                return <HistoryOverlay closeOverlayCb={closeOverlayFn} srcVideoCb={this.setAndLaunchVideoSrc}/>
+            case this.overlayIds.SETTINGS:
+                return <WindowSettingsOverlay closeOverlayCb={closeOverlayFn}/>
+            default:
+                // Do nothing
+        }
+
+        return <div></div>;
     }
 
     setAndLaunchVideoSrc(videoDetails) {
@@ -73,15 +88,18 @@ export default class FloatdeoMainPage extends React.Component {
             [<SettingsIcon color="action" fontSize="large"/>, this.setCurrentOverlay.bind(this, 'SETTINGS')]
         ]
 
-        let closeOverlayFn = this.setCurrentOverlay.bind(this,null);
-
         return (
             <div className="floatdeo-main-container">
                 <div className="main-display-container">
                     <VideoContainerComponent videoDetails={this.state.videoDetails}/>
-                    <VideoSrcOverlay isShown={this.isShownCheck(overlayIds.VIDEOSRC)} closeOverlayCb={closeOverlayFn} srcVideoCb={this.setAndLaunchVideoSrc}/>
-                    <HistoryOverlay isShown={this.isShownCheck(overlayIds.HISTORY)} closeOverlayCb={closeOverlayFn} srcVideoCb={this.setAndLaunchVideoSrc}/>
-                    <WindowSettingsOverlay isShown={this.isShownCheck(overlayIds.SETTINGS)} closeOverlayCb={closeOverlayFn}/>
+                    <CSSTransition
+                        in={this.state.isOverlayDisplayed}
+                        timeout={500}
+                        classNames="overlay-wrapper-transition"
+                        mountOnEnter
+                        unmountOnExit>
+                            {this.buildCurrentOverlayContents()}
+                    </CSSTransition>
                 </div>
                 <OptionsBarComponent options={orderedOptions}/>
             </div>

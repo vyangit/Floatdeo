@@ -22,8 +22,8 @@ export default class VideoSrcModal extends React.Component {
 
     render() {
         return (
-            <OverlayWrapperComponent isShown={this.props.isShown}>
-
+            <OverlayWrapperComponent>
+                
             </OverlayWrapperComponent>
         );
     }

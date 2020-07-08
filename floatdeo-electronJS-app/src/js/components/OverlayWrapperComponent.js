@@ -16,15 +16,8 @@ export default class OverlayWrapperComponent extends React.Component {
     }
 
     render() {
-        var style = {};
-
-        if (this.props.isShown) {
-            style['display'] = 'block';
-            style['opacity'] = 1;
-        }
-
         return (
-            <div className="overlay-wrapper" style={style} >
+            <div className="overlay-wrapper">
                 <div className="overlay-wrapper-container">
                     {this.props.children}
                 </div>
