@@ -18,7 +18,7 @@ export default class OverlayWrapperComponent extends React.Component {
     render() {
         return (
             <div className="overlay-wrapper">
-                <div className="overlay-wrapper-container">
+                <div className="overlay-container">
                     {this.props.children}
                 </div>
             </div>

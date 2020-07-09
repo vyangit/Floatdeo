@@ -38,7 +38,7 @@ export default class OptionsBarComponent extends React.Component {
         let btns = this.buildButtons();
 
         return (
-            <div className="options-bar d-flex justify-content-center align-items-center">
+            <div className="options-bar d-flex justify-content-center align-items-center align-self-end">
                 {btns}
             </div>
         );

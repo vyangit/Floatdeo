@@ -13,8 +13,8 @@ function createWindow() {
 		alwaysOnTop: false,
 		// frame: false,
 		autoHideMenuBar: true,
-		minWidth: 450, minHeight: 350,
-		width: 600, height: 400,
+		minWidth: 600, minHeight: 450,
+		width: 600, height: 450,
 	})
 
 	// load the index.html of the app
