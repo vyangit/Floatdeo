@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
+  stats: 'minimal',
   output: {
     filename: 'index.bundle.js',
     path: path.resolve(__dirname, 'build'),

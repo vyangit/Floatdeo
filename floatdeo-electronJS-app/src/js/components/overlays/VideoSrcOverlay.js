@@ -48,7 +48,8 @@ export default class VideoSrcOverlay extends React.Component {
         if (this.isActiveMode(mode)) return;
         
         this.setState({
-            srcMode: mode
+            srcMode: mode,
+            rawSourceInput: ''
         });
     }
 
@@ -66,7 +67,9 @@ export default class VideoSrcOverlay extends React.Component {
                     <form className="d-flex flex-column flex-grow-1">
                         <div className="form-group d-flex flex-column flex-grow-1">
                             <label>Webpage:</label>
-                            <textarea className="form-control d-flex flex-column flex-grow-1" style={textareaStyle}></textarea>
+                            <textarea className="form-control d-flex flex-column flex-grow-1" style={textareaStyle} onChange={(event) => this.handleRawSourceInputChange(event.target.value)}>
+                                {this.state.rawSourceInput}
+                            </textarea>
                         </div>
                     </form>
                 );
@@ -75,15 +78,24 @@ export default class VideoSrcOverlay extends React.Component {
                     <form className="d-flex flex-column flex-grow-1">
                         <div className="form-group d-flex flex-column flex-grow-1">
                             <label>Embedded link:</label>
-                            <textarea className="form-control d-flex flex-column flex-grow-1" style={textareaStyle}></textarea>
+                            <textarea className="form-control d-flex flex-column flex-grow-1" style={textareaStyle}>
+                                {this.state.rawSourceInput}
+                            </textarea>
                         </div>
                     </form>
                 );
         }
     }
 
+    handleRawSourceInputChange(rawSourceString) {
+        this.setState({
+            rawSourceInput: rawSourceString
+        });
+    }
+
     handleParseSourceStringAndLaunchVideo() {
-        //TODO
+        let videoDetails = new VideoDetails(this.state.srcMode, this.state.rawSourceInput)
+        this.props.srcVideoCb(videoDetails)
     }
 
     render() {
@@ -98,7 +110,7 @@ export default class VideoSrcOverlay extends React.Component {
                     </button>
                 </div>
                 <div className="overlay-body">
-                    <ul className="nav nav-pills nav-fill">
+                    <ul className="nav nav-pills nav-fill" style={{paddingBottom:'5px'}}>
                         <li className="nav-item" onClick={() => this.setActiveMode(this.srcModes.WEBPAGE)}>
                             <a className={this.buildTabClasses(this.srcModes.WEBPAGE)} href="#">Webpage</a>
                         </li>
@@ -109,7 +121,7 @@ export default class VideoSrcOverlay extends React.Component {
                     {tabContentBodyContents}
                 </div>
                 <div className="overlay-footer">
-                    <button type="button" className="btn btn-dark flex-fill">
+                    <button type="button" className="btn btn-dark flex-fill" onClick={this.handleParseSourceStringAndLaunchVideo} >
                         <PlayCircleOutlineIcon fontSize="large" style={{paddingRight: '10px'}}/>
                         <span>Play Video</span>
                     </button>   

@@ -74,6 +74,7 @@ html, body {
 .overlay-container {
   display: flex;
   height: 100%;
+  padding: 10px;
   flex-direction: column;
   align-self: center;
   flex-grow: 1;
@@ -85,7 +86,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
 }
 
 .overlay-body {
@@ -93,11 +93,10 @@ html, body {
   flex-direction: column;
   align-self: stretch;
   flex-grow: 1;
-  padding: 0px 10px;
+  margin: 0px 10px;
 }
 
 .overlay-footer {
   display: flex;
   align-items: center;
-  padding: 10px;
 }
