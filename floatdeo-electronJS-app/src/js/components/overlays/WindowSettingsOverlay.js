@@ -26,6 +26,9 @@ export default class WindowSettingsOverlay extends React.Component {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <div className="overlay-body">
+                    
+                </div>
             </OverlayWrapperComponent>
         );
     }
