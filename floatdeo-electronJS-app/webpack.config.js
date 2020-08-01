@@ -5,6 +5,9 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   stats: 'minimal',
+  devServer: {
+    stats: 'errors-only'
+  },
   output: {
     filename: 'index.bundle.js',
     path: path.resolve(__dirname, 'build'),

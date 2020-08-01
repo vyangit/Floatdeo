@@ -75,7 +75,6 @@ export default class FloatdeoMainPage extends React.Component {
     }
 
     setAndLaunchVideoSrc(videoDetails) {
-        console.log(videoDetails);
         this.setState({
             videoDetails: videoDetails
         });

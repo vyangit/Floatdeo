@@ -5,20 +5,27 @@
  */
 
 const {app, BrowserWindow, session, protocol} = require('electron');
+var express = require('express');
+const {serverUp} = require('./server')
+
+const port = serverUp();
 
 function createWindow() {
+
   	// Create the browser window
 	win = new BrowserWindow({
 		backgroundColor: '#2e2c29',
 		alwaysOnTop: false,
+		title: "Floatdeo",
 		// frame: false,
 		autoHideMenuBar: true,
 		minWidth: 600, minHeight: 450,
 		width: 600, height: 450,
 	})
 
-	// load the index.html of the app
-	win.loadFile('index.html')
+	// load the app
+	win.loadURL(`http://localhost:${port}`);
+	// win.loadFile('index.html');
 
 	// Comment out to disable dev tools
 	win.webContents.openDevTools();
@@ -28,20 +35,33 @@ function createWindow() {
 	});	
 }
 
-function registerFileProtocol() {
-	protocol.registerFileProtocol('floatdeo', (request, callback) => {
+function setupSession() {
+	let ses = session.defaultSession;
+	// registerFileProtocol(ses);
+	// registerHttpProtocol(ses);
+	// ses.setProxy({proxyRules:"http=192.168.1.74:3987"});
+}
+
+function registerHttpProtocol(ses) {
+	// ses.protocol.registerHttpProtocol('floatdeo',)
+}
+
+function registerFileProtocol(ses) {
+	ses.protocol.registerFileProtocol('floatdeo', (request, callback) => {
 		const url = request.url.substr(11)
 		if (url) {
+			console.log(__dirname);
 			callback({ path: path.normalize(`${__dirname}/${url}`) })
 		} else {
 			console.error('Failed to register protocol');
 		}
 	});
+
 }
 
 // Setup on app launch
 app.whenReady().then(() => {
-	registerFileProtocol();
+	setupSession();
 	createWindow();
 });
 

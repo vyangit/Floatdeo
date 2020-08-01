@@ -12,7 +12,7 @@ import React from 'react';
 
 // Locals
 import OverlayWrapperComponent from 'Components/OverlayWrapperComponent';
-import VideoDetails from 'Objects/VideoDetailsObject';
+import VideoDetails, {VideoSrcTypes} from 'Objects/VideoDetailsObject';
 
 // Assets
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
@@ -22,13 +22,10 @@ export default class VideoSrcOverlay extends React.Component {
     constructor(props) {
         super(props)
 
-        this.srcModes = {
-            WEBPAGE: 'webpage',
-            EMBEDDED: 'embedded-link'
-        }
-
+        //Prod code
         this.state = {
-            srcMode: this.srcModes.WEBPAGE
+            srcMode: VideoSrcTypes.EMBEDDED,
+            rawSourceInput: ''
         }
 
         this.isActiveMode = this.isActiveMode.bind(this);
@@ -62,24 +59,30 @@ export default class VideoSrcOverlay extends React.Component {
         let textareaStyle = {resize:'none'};
 
         switch(this.state.srcMode) {
-            case this.srcModes.WEBPAGE:
+            case VideoSrcTypes.WEB:
                 return (
                     <form className="d-flex flex-column flex-grow-1">
                         <div className="form-group d-flex flex-column flex-grow-1">
-                            <label>Webpage:</label>
-                            <textarea className="form-control d-flex flex-column flex-grow-1" style={textareaStyle} onChange={(event) => this.handleRawSourceInputChange(event.target.value)}>
-                                {this.state.rawSourceInput}
+                            <label>Web link:</label>
+                            <textarea 
+                                className="form-control d-flex flex-column flex-grow-1" 
+                                style={textareaStyle} 
+                                value={this.state.rawSourceInput}
+                                onChange={(event) => this.handleRawSourceInputChange(event.target.value)}>
                             </textarea>
                         </div>
                     </form>
                 );
-            case this.srcModes.EMBEDDED:
+            case VideoSrcTypes.EMBEDDED:
                 return (
                     <form className="d-flex flex-column flex-grow-1">
                         <div className="form-group d-flex flex-column flex-grow-1">
                             <label>Embedded link:</label>
-                            <textarea className="form-control d-flex flex-column flex-grow-1" style={textareaStyle}>
-                                {this.state.rawSourceInput}
+                            <textarea 
+                                className="form-control d-flex flex-column flex-grow-1" 
+                                style={textareaStyle} 
+                                value={this.state.rawSourceInput}
+                                onChange={(event) => this.handleRawSourceInputChange(event.target.value)}>
                             </textarea>
                         </div>
                     </form>
@@ -111,11 +114,11 @@ export default class VideoSrcOverlay extends React.Component {
                 </div>
                 <div className="overlay-body">
                     <ul className="nav nav-pills nav-fill" style={{paddingBottom:'5px'}}>
-                        <li className="nav-item" onClick={() => this.setActiveMode(this.srcModes.WEBPAGE)}>
-                            <a className={this.buildTabClasses(this.srcModes.WEBPAGE)} href="#">Webpage</a>
-                        </li>
-                        <li className="nav-item" onClick={() => this.setActiveMode(this.srcModes.EMBEDDED)}>
-                            <a className={this.buildTabClasses(this.srcModes.EMBEDDED)} href="#">Embedded</a>
+                        {/* <li className="nav-item" onClick={() => this.setActiveMode(VideoSrcTypes.WEB)}>
+                            <a className={this.buildTabClasses(VideoSrcTypes.WEB)} href="#">Webpage</a>
+                        </li> */}
+                        <li className="nav-item" onClick={() => this.setActiveMode(VideoSrcTypes.EMBEDDED)}>
+                            <a className={this.buildTabClasses(VideoSrcTypes.EMBEDDED)} href="#">Embedded</a>
                         </li>
                     </ul>              
                     {tabContentBodyContents}
