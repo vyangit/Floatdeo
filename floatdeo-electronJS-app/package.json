@@ -7,6 +7,7 @@
     "build": "webpack",
     "run": "electron .",
     "start": "npm run-script build & npm run-script run",
+    "debug": "npm run-script build & nodemon server-main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

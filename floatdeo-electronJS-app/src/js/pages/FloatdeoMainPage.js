@@ -12,7 +12,7 @@ import {CSSTransition} from 'react-transition-group';
 import VideoContainerComponent from 'Components/VideoContainerComponent';
 import OptionsBarComponent from 'Components/OptionsBarComponent';
 
-import WindowSettingsOverlay from 'Components/overlays/WindowSettingsOverlay';
+import SettingsOverlay from 'Components/overlays/SettingsOverlay';
 import HistoryOverlay from 'Components/overlays/HistoryOverlay';
 import VideoSrcOverlay from 'Components/overlays/VideoSrcOverlay';
 
@@ -66,7 +66,7 @@ export default class FloatdeoMainPage extends React.Component {
             case this.overlayIds.HISTORY:
                 return <HistoryOverlay closeOverlayCb={closeOverlayFn} srcVideoCb={this.setAndLaunchVideoSrc}/>
             case this.overlayIds.SETTINGS:
-                return <WindowSettingsOverlay closeOverlayCb={closeOverlayFn}/>
+                return <SettingsOverlay closeOverlayCb={closeOverlayFn}/>
             default:
                 // Do nothing
         }

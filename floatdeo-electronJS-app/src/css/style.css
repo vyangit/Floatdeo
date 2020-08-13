@@ -90,12 +90,14 @@ html, body {
 
 .overlay-header {
   display: flex;
+  height: 10%;
   align-items: center;
   justify-content: space-between;
 }
 
 .overlay-body {
   display: flex;
+  height: 75%;
   flex-direction: column;
   align-self: stretch;
   flex-grow: 1;
@@ -104,5 +106,32 @@ html, body {
 
 .overlay-footer {
   display: flex;
+  height: 15%;
   align-items: center;
+}
+
+.settings-overlay-drawer {
+  display: flex;
+  padding: 10px;
+  border-right: rgba(128, 128, 128, 0.9) 2px solid;
+}
+
+.settings-overlay-drawer-container {
+  display: flex;
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.settings-overlay-drawer-nav-link {
+  color: white !important;
+}
+
+
+.settings-overlay-drawer-nav-link:hover {
+  color: gainsboro !important;
+}
+
+.settings-overlay-drawer-container-header {
+  padding-bottom: 10px;
+  border-bottom: rgba(128, 128, 128, 0.9) 2px solid;
 }

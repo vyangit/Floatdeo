@@ -4,8 +4,7 @@
  * The main initiation script and functions to set up the ElectronJS window 
  */
 
-const {app, BrowserWindow, session, protocol} = require('electron');
-var express = require('express');
+const {app, BrowserWindow, session, protocol, ipcMain} = require('electron');
 const {serverUp} = require('./server')
 
 const port = serverUp();
@@ -21,6 +20,9 @@ function createWindow() {
 		autoHideMenuBar: true,
 		minWidth: 600, minHeight: 450,
 		width: 600, height: 450,
+		webPreferences: {
+			nodeIntegration: true
+		}
 	})
 
 	// load the app
@@ -80,4 +82,26 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
+});
+
+// Window settings listeners
+ipcMain.on('window-opacity-change', (event, opacity) => {
+	if (opacity >= 0.25 || opacity <= 1) {
+		let windows = BrowserWindow.getAllWindows()
+		for (window of windows) {
+			window.setOpacity(opacity);
+		}
+		event.returnValue = true;
+	}
+	event.returnValue = false;
+});
+
+
+ipcMain.on('window-always-on-top-change', (event, isOnTop) => {
+	let windows = BrowserWindow.getAllWindows()
+	for (window of windows) {
+		window.setAlwaysOnTop(isOnTop);
+	}
+	
+	event.returnValue = isOnTop;
 });
